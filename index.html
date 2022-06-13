@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Creative - Start Bootstrap Theme</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap Icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- SimpleLightbox plugin CSS-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#page-top">BMI System</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#services">Data Collected</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#portfolio">Suggestions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">See Doc</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container px-4 px-lg-5 h-100">
+                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                    <div class="col-lg-8 align-self-end">
+                        <h1 class="text-white font-weight-bold">BMI SYSTEM</h1>
+                        <hr class="divider" />
+                    </div>
+                    <div class="col-lg-8 align-self-baseline">
+                        <p class="text-white-75 mb-5">
+                            <table class="table" style="color: white;">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Id Of Patient</th>
+                                    <th scope="col">BMI</th>
+                                    <th scope="col">Suggestions</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row">1</th>
+                                    <td id="nameOne"></td>
+                                    <td id="bmiOne"></td>
+                                    <td id="suggOne"></td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">2</th>
+                                    <td id="nameTwo"></td>
+                                    <td id="bmiTwo"></td>
+                                    <td id="suggeTwo"></td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">3</th>
+                                    <td id="nameThree"></td>
+                                    <td id="bmiThree"></td>
+                                    <td id="suggeThree"></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </p>
+                        <a class="btn btn-primary btn-xl" href="#">Load More Data</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- About-->
+        <section class="page-section bg-primary" id="about">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="text-white mt-0">How good annd awesome is keeping your health good</h2>
+                        <hr class="divider divider-light" />
+                        <p class="text-white-75 mb-4">Measure the BMI</p>
+                        <a class="btn btn-light btn-xl" href="#">And Get Suggestions</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Services-->
+      
+       
+        <!-- Footer-->
+        <footer class="bg-light py-5">
+            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2021 - Health Mentor</div></div>
+
+            <div class="container px-4 px-lg-5 pt-2"><div class="small text-center text-muted">@<a href="https://themewagon.com/">2022</a>
+            </div></div>
+        </footer>
+
+        <script>
+
+            function giveSugge(value)
+            {
+                if(value == 10)
+                {
+                    return "HEALTH CONDITION"
+                }
+                else if(value == 11)
+                {
+                    return 'UNDER WEIGHT'
+                }
+                else if(value == 12)
+                {
+                    return 'OVER WEIGHT'
+                }
+                else if(value == 13)
+                {
+                    return 'OBESE'
+                }
+            }
+
+            function loadData()
+            {
+                var xhr = new XMLHttpRequest();
+
+                xhr.open("GET", "https://api.thingspeak.com/channels/1767181/feeds.json?api_key=9DE8HF2M4EQ6NN4H&results=3", true)
+
+                xhr.onload = function()
+                {
+                    if(this.status == 200)
+                    {
+                        data = this.responseText
+                        data = JSON.parse(data)
+                        data = data.feeds
+                        var nameOne = document.getElementById("nameOne")
+                        var nameTwo = document.getElementById("nameTwo")
+                        var nameThree = document.getElementById('nameThree')
+                        var bmiOne = document.getElementById("bmiOne")
+                        var bmiTwo = document.getElementById("bmiTwo")
+                        var bmiThree = document.getElementById("bmiThree")
+                        var suggOne =document.getElementById("suggOne")
+                        var suggeTwo = document.getElementById('suggeTwo')
+                        var suggeThree = document.getElementById("suggeThree")
+                        // here we have to load the moda
+                        nameOne.innerHTML = data[0].entry_id
+                        bmiOne.innerHTML = data[0].field3
+                        suggOne.innerHTML =  giveSugge(data[0].field4)
+
+                        nameTwo.innerHTML = data[1].entry_id
+                        bmiTwo.innerHTML = data[1].field3
+                        suggeTwo.innerHTML = giveSugge(data[1].field4)
+
+                        // let have the three
+                        nameThree.innerHTML = data[2].entry_id
+                        bmiThree.innerHTML = data[2].field3
+                        suggeThree.innerHTML =  giveSugge(data[2].field4)
+
+
+                    }
+                }
+
+                xhr.onerror = function ()
+                {
+                    console.log("Error has occured try again")
+                }
+
+                xhr.send()
+            }
+            setInterval(loadData, 3000) 
+        </script>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
